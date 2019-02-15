@@ -1,0 +1,29 @@
+# Making a nice function for counting different marketcaps from the
+# "cap" DataFrame. Returns an int.
+# INSTRUCTORS NOTE: Since you made it to the end, consider it a gift :D
+def capcount(query_string):
+    return cap.query(query_string).count().id
+
+# Labels for the plot
+LABELS = ["biggish", "micro", "nano"]
+
+# Using capcount count the biggish cryptos
+biggish = capcount('market_cap_usd > 3e+8')
+# Same as above for micro ...
+micro = capcount('market_cap_usd > 5e+7 and market_cap_usd < 3e+8')
+# ... and for nano
+nano =  capcount('market_cap_usd<5e+7')
+
+# Making a list with the 3 counts
+values = [biggish,micro,nano]
+
+# Plotting them with matplotlib 
+fig,ax = plt.subplots()
+big,mic,nan = plt.bar([0,1,2],values, tick_label = LABELS)
+
+nan.set_facecolor('blue')
+mic.set_facecolor('yellow')
+big.set_facecolor('red')
+ax.set_ylabel('No of coins')
+ax.set_title('Market_Cap_USD')
+plt.show()
